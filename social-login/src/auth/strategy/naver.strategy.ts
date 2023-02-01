@@ -11,6 +11,11 @@ export class NaverStrategy extends PassportStrategy(Strategy, 'naver') {
   }
 
   validate(accessToken: string, refreshToken: string, profile: Profile) {
+    const profileImage = profile._json.profile_image
+      ? profile._json.profile_image
+      : process.env.DEFUALT_IMG_URL;
+
+    console.log(profileImage);
     return {
       name: profile.displayName,
       email: profile._json.email,
